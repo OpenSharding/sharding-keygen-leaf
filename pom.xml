@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.opensharding</groupId>
     <artifactId>sharding-keygen-leaf</artifactId>
-    <version>4.0.0-RC3-SNAPSHOT</version>
+    <version>4.0.0</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     
@@ -37,9 +37,10 @@
         
         <zookeeper.version>3.4.14</zookeeper.version>
         <curator.version>2.10.0</curator.version>
-        <jackson.version>2.9.10.1</jackson.version>
+        <jackson.version>2.9.10</jackson.version>
 
         <meituan.leaf.version>1.0.1</meituan.leaf.version>
+        <mybatis.version>3.3.0</mybatis.version>
     
         <springframework.version>[4.3.6.RELEASE,5.0.0.M1)</springframework.version>
         <spring-boot.version>[1.5.0.RELEASE,2.0.0.M1)</spring-boot.version>
@@ -57,10 +58,12 @@
         <commons-dbcp2.version>2.2.0</commons-dbcp2.version>
         <tomcat-dbcp.version>9.0.14</tomcat-dbcp.version>
         <commons-pool.version>1.6</commons-pool.version>
+        <commons-io.version>2.6</commons-io.version>
         <h2.version>1.4.196</h2.version>
         <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
         <postgresql.version>42.2.5</postgresql.version>
         <mssql.version>6.1.7.jre7-preview</mssql.version>
+        <perf4j.version>0.9.16</perf4j.version>
         
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
@@ -102,8 +105,6 @@
                 <groupId>com.sankuai.inf.leaf</groupId>
                 <artifactId>leaf-core</artifactId>
                 <version>${meituan.leaf.version}</version>
-                <scope>system</scope>
-                <systemPath>${project.basedir}/Leaf/leaf-core/target/leaf.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -239,7 +240,12 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
-            
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-test</artifactId>
@@ -318,6 +324,17 @@
                 <version>${spring-boot.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.perf4j</groupId>
+                <artifactId>perf4j</artifactId>
+                <version>${perf4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     
@@ -367,6 +384,17 @@
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -392,6 +420,14 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.perf4j</groupId>
+            <artifactId>perf4j</artifactId>
         </dependency>
     </dependencies>
     
@@ -509,6 +545,30 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${project.basedir}/Leaf/leaf-core/target/leaf.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.sankuai.inf.leaf</groupId>
+                            <artifactId>leaf-core</artifactId>
+                            <version>${meituan.leaf.version}</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
