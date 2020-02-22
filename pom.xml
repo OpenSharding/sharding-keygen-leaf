@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.opensharding</groupId>
     <artifactId>sharding-keygen-leaf</artifactId>
-    <version>5.0.0-RC1-SNAPSHOT</version>
+    <version>4.0.0-RC3-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     
