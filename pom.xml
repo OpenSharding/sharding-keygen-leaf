@@ -102,6 +102,8 @@
                 <groupId>com.sankuai.inf.leaf</groupId>
                 <artifactId>leaf-core</artifactId>
                 <version>${meituan.leaf.version}</version>
+                <scope>system</scope>
+                <systemPath>${project.basedir}/Leaf/leaf-core/target/leaf.jar</systemPath>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
