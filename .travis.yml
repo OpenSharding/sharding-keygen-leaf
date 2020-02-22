@@ -1,17 +1,19 @@
-sudo: required
 cache: 
   directories: 
     - "$HOME/.m2"
 
 language: java
 jdk:
-  - oraclejdk8
-#  - oraclejdk7
-#  - openjdk7
+  - openjdk8
 
-before_script:
-  - echo "MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'" > ~/.mavenrc
+install: true
+
 script:
-  - mvn clean install cobertura:cobertura coveralls:report -DrepoToken="${COVERALLS_REPO_TOKEN}" -Dmaven.javadoc.skip=true
-
-install: travis_wait 30 mvn install
+  - echo "git clone and build Leaf project..."
+  - git clone https://github.com/Meituan-Dianping/Leaf
+  - cd Leaf
+  - mvn clean package install -Dmaven.test.skip=true -pl leaf-core
+  - cd ..
+  - echo "build sharding-keygen-leaf project..."
+  - mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+  - echo "Build successfully."
