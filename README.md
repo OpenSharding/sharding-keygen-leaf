@@ -1,6 +1,6 @@
 # Sharding Keygen Leaf
 
-Using [Meituan LeafSegment & LeafSnowflake](https://github.com/Meituan-Dianping/Leaf) to implement two ShardingKeyGenerator with ShardingSphere RC1-SNAPSHOT.
+Using [Meituan LeafSegment & LeafSnowflake](https://github.com/Meituan-Dianping/Leaf) to implement two ShardingKeyGenerator with ShardingSphere.
 More information about the two algorithms also see: [Leaf key generator introduce](https://tech.meituan.com/2019/03/07/open-source-project-leaf.html).
 
 ## Prerequisites
