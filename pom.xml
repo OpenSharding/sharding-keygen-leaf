@@ -101,11 +101,11 @@
                 <artifactId>sharding-orchestration-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
+            <!-- dependency>
                 <groupId>com.sankuai.inf.leaf</groupId>
                 <artifactId>leaf-core</artifactId>
                 <version>${meituan.leaf.version}</version>
-            </dependency>
+            </dependency -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -343,10 +343,10 @@
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-orchestration-core</artifactId>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>com.sankuai.inf.leaf</groupId>
             <artifactId>leaf-core</artifactId>
-        </dependency>
+        </dependency -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -449,6 +449,9 @@
                         <target>${java.version}</target>
                         <testSource>${java.version}</testSource>
                         <testTarget>${java.version}</testTarget>
+                        <compilerArguments>
+                            <extdirs>${project.basedir}/Leaf/leaf-core/target</extdirs>
+                        </compilerArguments>
                     </configuration>
                     <version>${maven-compiler-plugin.version}</version>
                 </plugin>
@@ -545,7 +548,7 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
+            <!-- wanna use this config to resolve travis, but no effect.  <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>
@@ -567,7 +570,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin -->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -581,6 +584,23 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${project.basedir}/Leaf/leaf-core/target/leaf.jar</additionalClasspathElement>
+                    </additionalClasspathElements>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.0.0-M1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
