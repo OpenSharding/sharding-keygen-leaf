@@ -37,7 +37,7 @@
         
         <zookeeper.version>3.4.14</zookeeper.version>
         <curator.version>2.10.0</curator.version>
-        <jackson.version>2.9.10</jackson.version>
+        <jackson.version>2.10.2</jackson.version>
 
         <meituan.leaf.version>1.0.1</meituan.leaf.version>
         <mybatis.version>3.3.0</mybatis.version>
