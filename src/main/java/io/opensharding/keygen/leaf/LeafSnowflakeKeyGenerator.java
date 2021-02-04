@@ -36,7 +36,7 @@ public final class LeafSnowflakeKeyGenerator implements ShardingKeyGenerator {
     @Setter
     private Properties properties;
 
-    private IDGen idGen;
+    private volatile IDGen idGen;
 
     @Override
     public Comparable<?> generateKey() {
